@@ -8,16 +8,36 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+app.UseHttpsRedirection();
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHsts();
+    app.UseForwardedHeaders();
+}
+else
+{
+    app.UseDeveloperExceptionPage();
+}
+
+app.UseRouting();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
-app.UseAuthorization();
+app.UseStaticFiles();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSpa(spa => { spa.UseProxyToSpaDevelopmentServer("http://localhost:3000"); });
+}
+else
+{
+    app.MapFallbackToFile("index.html");
+}
 
-app.MapControllers();
-
-app.Run();
+await app.RunAsync();
