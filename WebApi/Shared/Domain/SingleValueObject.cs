@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace WebApi.Domain.Shared;
+namespace WebApi.Shared.Domain;
 
 [DebuggerDisplay("{Value}")]
 public abstract record SingleValueObject<T, TValue>(TValue Value)

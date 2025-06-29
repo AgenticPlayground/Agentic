@@ -8,12 +8,19 @@ including identifying aggregates, entities, value objects, and bounded contexts.
 
 ## Principles for Domain Model Design
 
+### Folder and Namespace Structure
+- **Feature-based Organization**: Domain model types (entities, value objects, repositories, etc.) should be organized by feature or bounded context (e.g., `Features/Principles/Domain`), not in a single global `Domain` folder.
+- **Shared Domain Types**: Common value objects or base types (such as `StronglyTypedId`, `SingleValueObject`, or `IdGenerator`) should be placed in a shared domain folder or namespace (e.g., `Shared/Domain`).
+- **Separation of Concerns**: Keep domain logic (entities, value objects, repositories) separate from application logic (use cases, handlers, controllers).
+- **Namespace Consistency**: Ensure namespaces reflect the folder structure for clarity and maintainability.
+
 ### Entity Design
 - **Private Constructor**: Entities must have a private constructor that takes all properties as parameters and sets them.
 - **Immutability**: Entity properties should have only getters, no setters.
 - **Value Objects for Properties**: All properties in entities must be value objects (not primitives).
 - **Id Naming**: The Id property must be named `Id` (not `EntityId` or similar).
 - **Property Naming**: Properties using value objects should not include the entity name in the property name, but the value object type should include the entity name.
+- **ID Generation in Factory**: The static `Create` method for entities must always generate the ID internally (e.g., using `PrincipleId.NewId()`). The ID must never be passed in as a parameter when creating new objects.
 
 ### Value Object Design
 - **Records**: All value objects must be implemented as records.
@@ -28,7 +35,8 @@ including identifying aggregates, entities, value objects, and bounded contexts.
 
 ## Examples
 
-### What To Do// Value Object with Validation
+### What To Do
+// Value Object with Validation
 public sealed record PrincipleName : SingleValueObject<PrincipleName, string>
 {
     private PrincipleName(string value) : base(value) { }
@@ -57,10 +65,12 @@ public class Principle
         Description = description;
         UserId = userId;
     }
-    public static Principle Create(PrincipleId id, PrincipleName name, PrincipleDescription description, UserId userId)
-        => new(id, name, description, userId);
+    // The Create method must always generate the ID internally
+    public static Principle Create(PrincipleName name, PrincipleDescription description, UserId userId)
+        => new(PrincipleId.NewId(), name, description, userId);
 }
-### What NOT To Do// ? Using primitive types for properties
+### What NOT To Do
+// ? Using primitive types for properties
 public class Principle
 {
     public long PrincipleId { get; set; } // Wrong: primitive type, wrong naming
@@ -76,6 +86,10 @@ public sealed record PrincipleId(long Value) : StronglyTypedId<PrincipleId>(Valu
 {
     public static PrincipleId Create(long value) => new(value); // Wrong: should not have Create
 }
+// ? Passing Id into entity factory
+public static Principle Create(PrincipleId id, PrincipleName name, PrincipleDescription description, UserId userId)
+    => new(id, name, description, userId); // Wrong: should not accept Id as parameter
+
 ## Arguments for This Approach
 
 ### Why This Is Good

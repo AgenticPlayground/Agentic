@@ -1,7 +1,7 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace WebApi.Domain.Shared;
+namespace WebApi.Shared.Domain;
 
 public static class IdGenerator
 {
