@@ -9,6 +9,9 @@ namespace WebApi.Features.Principles.Domain
         public PrincipleDescription Description { get; }
         public UserId UserId { get; }
 
+        public Principle(PrincipleId id, PrincipleName name, PrincipleDescription description, UserId userId)
+            : this(id, name, description, userId) { }
+
         private Principle(PrincipleId id, PrincipleName name, PrincipleDescription description, UserId userId)
         {
             Id = id;

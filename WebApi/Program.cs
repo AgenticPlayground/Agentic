@@ -6,6 +6,9 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+// Register InMemoryPrincipleRepository for IPrincipleRepository
+builder.Services.AddSingleton<WebApi.Features.Principles.Domain.IPrincipleRepository, WebApi.Features.Principles.Domain.InMemoryPrincipleRepository>();
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();
