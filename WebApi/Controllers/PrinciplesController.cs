@@ -1,10 +1,10 @@
+using Agentic.WebApi.Features.Principles.Domain;
+using Agentic.WebApi.Features.Principles.UseCases;
+using Agentic.WebApi.Shared.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Features.Principles.Domain;
-using WebApi.Features.Principles.UseCases;
-using WebApi.Shared.Domain;
 
-namespace WebApi.Controllers
+namespace Agentic.WebApi.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]

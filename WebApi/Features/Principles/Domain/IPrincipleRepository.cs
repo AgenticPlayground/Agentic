@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace WebApi.Features.Principles.Domain;
+namespace Agentic.WebApi.Features.Principles.Domain;
 
 public interface IPrincipleRepository
 {
