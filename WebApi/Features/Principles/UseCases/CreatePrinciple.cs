@@ -1,8 +1,8 @@
-﻿using MediatR;
-using WebApi.Features.Principles.Domain;
-using WebApi.Shared.Domain;
+﻿using Agentic.WebApi.Features.Principles.Domain;
+using Agentic.WebApi.Shared.Domain;
+using MediatR;
 
-namespace WebApi.Features.Principles.UseCases;
+namespace Agentic.WebApi.Features.Principles.UseCases;
 
 public static class CreatePrinciple
 {

@@ -1,3 +1,5 @@
+using Agentic.WebApi.Features.Principles.Domain;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 // Register InMemoryPrincipleRepository for IPrincipleRepository
-builder.Services.AddSingleton<WebApi.Features.Principles.Domain.IPrincipleRepository, WebApi.Features.Principles.Domain.InMemoryPrincipleRepository>();
+builder.Services.AddSingleton<IPrincipleRepository, InMemoryPrincipleRepository>();
 
 var app = builder.Build();
 

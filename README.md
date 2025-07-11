@@ -9,17 +9,43 @@ This is a public repository, and will also be a playground for AI exploration. K
 ## Technologies
 
 - ASP.NET Core (backend)
-- SQL Server (database)
+- Postgres (database)
 - MCP server integration
 - React (frontend)
+
+## Getting started
+Clone the repository
+
+```sh
+git clone https://github.com/AgenticPlayground/Agentic
+```
+
+Run docker compose in the root directory:
+```sh
+docker compose up -d
+```
+
+Run deployment project to apply database migrations:
+```sh
+dotnet run --project ./Deployment/Deployment.csproj
+```
+
+Run the backend project:
+```sh
+dotnet run --project ./WebApi/WebApi.csproj
+```
+
+Run the frontend project:
+```sh
+cd ./WebApp
+npm install
+npm run dev
+```
 
 ## Project Decisions
 
 All major decisions and insights from building Agentic are documented on my blog: [engineeringWithFilip.com](https://engineeringwithfilip.com)
 
-## Getting Started
-
-*Instructions for connecting to the MCP server and running the application will be added soon.*
 
 ## Contributing
 

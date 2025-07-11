@@ -1,6 +1,12 @@
-@WebApi_HostAddress = http://localhost:5015
+@WebApi_HostAddress = https://localhost:7048
 
-GET {{WebApi_HostAddress}}/weatherforecast/
+POST {{WebApi_HostAddress}}/api/principles
 Accept: application/json
+Content-Type: application/json
+
+{
+  "name":"My First Principle",
+  "content": "Hello there"
+}
 
 ###

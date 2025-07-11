@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace WebApi.Shared.Domain;
+namespace Agentic.WebApi.Shared.Domain;
 
 [DebuggerDisplay("{Value}")]
 public abstract record StronglyTypedId<T>(long Value) : SingleValueObject<T, long>(Value)
